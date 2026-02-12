@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Kartka Walentynkowa</title>
+</head>
+
+<body
+    class="bg-pink-100 min-h-screen flex items-center justify-center overflow-hidden transition-colors duration-1000 relative">
+    <!-- Heart container -->
+    <div id="heartContainer"" class=" absolute min-h-screen w-screen flex items-center justify-center flex-col
+        transition-transform duration-2000 heartContainerHidden">
+
+        <!-- Heart -->
+        <div class="relative flex items-center justify-center">
+            <p class="absolute text-4xl font-bold text-pink-200 text-center -translate-y-[30px]">Czy zostaniesz moją
+                Walentynką?</p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" fill="rgb(255,14,14)"
+                class="bi bi-heart-fill" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314" />
+            </svg>
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex flex-nowrap gap-20">
+            <button id="yesButton"
+                class="px-8 py-2 bg-green-600 rounded-xl text-slate-100 text-xl font-semibold cursor-pointer hover:scale-110 transition-transform">Tak!</button>
+            <button id="noButton"
+                class="px-8 py-2 bg-red-600 rounded-xl text-slate-100 text-xl font-semibold">Nie.</button>
+        </div>
+    </div>
+
+
+    <!-- Vinyl player -->
+    <div id="vinylPlayer"
+        class="w-[450px] aspect-square bg-amber-900/75 rounded-lg relative transition-transform duration-1500">
+
+        <!-- Dot in the middle -->
+        <div
+            class="absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2 w-[5%] aspect-square bg-stone-400 rounded-full">
+        </div>
+
+        <!-- Controls in the bottom right corner -->
+        <div
+            class="absolute left-[92%] top-[92%] -translate-x-1/2 -translate-y-1/2 rounded-full w-[5%] aspect-square bg-stone-300">
+        </div>
+        <div
+            class="absolute left-[86%] top-[92%] -translate-x-1/2 -translate-y-1/2 rounded-full w-[5%] aspect-square bg-stone-300">
+        </div>
+        <div
+            class="absolute left-[80%] top-[92%] -translate-x-1/2 -translate-y-1/2 rounded-full w-[5%] aspect-square bg-stone-300">
+        </div>
+
+        <!-- Vinyl record -->
+        <div id="vinyl0"
+            class="absolute left-[50%] top-[50%] -translate-y-1/2 w-[350px] aspect-square rounded-full vinylBackground flex justify-center items-center transition-transform duration-2000 beforeVinyl">
+            <svg width="300" height="300" class="-rotate-90">
+                <defs>
+                    <path id="circlePath" d="M 150,150 m -120,0 a 120,120 0 1,1 240,0 a 120,120 0 1,1 -240,0" />
+                </defs>
+
+                <text fill="white" font-size="22" font-weight="bold">
+                    <textPath href="#circlePath" startOffset="50%" text-anchor="middle" class="select-none">
+                        Cześć Słońce! Kliknij cokolwiek, żeby kontynuować...
+                    </textPath>
+                </text>
+            </svg>
+        </div>
+
+        <!-- Vinyl record -->
+        <div id="vinyl1"
+            class="absolute left-[50%] top-[50%] -translate-y-1/2 w-[350px] aspect-square rounded-full vinylBackground flex justify-center items-center transition-transform duration-2500 beforeVinyl">
+            <svg width="300" height="300" class="-rotate-90">
+                <defs>
+                    <path id="circlePath" d="M 150,150 m -120,0 a 120,120 0 1,1 240,0 a 120,120 0 1,1 -240,0" />
+                </defs>
+
+                <text fill="white" font-size="22" font-weight="bold">
+                    <textPath href="#circlePath" startOffset="50%" text-anchor="middle" class="select-none">
+                        Nie mamy jak się zobaczyć na żywo...
+                    </textPath>
+                </text>
+            </svg>
+        </div>
+
+        <!-- Vinyl record -->
+        <div id="vinyl2"
+            class="absolute left-[50%] top-[50%] -translate-y-1/2 w-[350px] aspect-square rounded-full vinylBackground flex justify-center items-center transition-transform duration-2500 beforeVinyl">
+            <svg width="300" height="300" class="-rotate-90">
+                <defs>
+                    <path id="circlePath" d="M 150,150 m -120,0 a 120,120 0 1,1 240,0 a 120,120 0 1,1 -240,0" />
+                </defs>
+
+                <text fill="white" font-size="22" font-weight="bold">
+                    <textPath href="#circlePath" startOffset="50%" text-anchor="middle" class="select-none">
+                        Więc nie mam jak Ci powiedzieć tego twarzą w twarz.
+                    </textPath>
+                </text>
+            </svg>
+        </div>
+
+        <!-- Vinyl record -->
+        <div id="vinyl3"
+            class="absolute left-[50%] top-[50%] -translate-y-1/2 w-[350px] aspect-square rounded-full vinylBackground flex justify-center items-center transition-transform duration-2500 beforeVinyl">
+            <svg width="300" height="300" class="-rotate-90">
+                <defs>
+                    <path id="circlePath" d="M 150,150 m -120,0 a 120,120 0 1,1 240,0 a 120,120 0 1,1 -240,0" />
+                </defs>
+
+                <text fill="white" font-size="22" font-weight="bold">
+                    <textPath href="#circlePath" startOffset="50%" text-anchor="middle" class="select-none">
+                        Ale masz chłopa programistę, i to zaradnego ;)
+                    </textPath>
+                </text>
+            </svg>
+        </div>
+
+        <!-- Vinyl record -->
+        <div id="vinyl4"
+            class="absolute left-[50%] top-[50%] -translate-y-1/2 w-[350px] aspect-square rounded-full vinylBackground flex justify-center items-center transition-transform duration-2500 beforeVinyl">
+            <svg width="300" height="300" class="-rotate-90">
+                <defs>
+                    <path id="circlePath" d="M 150,150 m -120,0 a 120,120 0 1,1 240,0 a 120,120 0 1,1 -240,0" />
+                </defs>
+
+                <text fill="white" font-size="22" font-weight="bold">
+                    <textPath href="#circlePath" startOffset="50%" text-anchor="middle" class="select-none">
+                        Moja Księżniczko, mam jedno pytanie...
+                    </textPath>
+                </text>
+            </svg>
+        </div>
+
+    </div>
+
+    <script>
+        let counter = 0;
+
+        const handleHeartPopup = () => {
+            console.log("making heart sequence");
+
+            document.getElementById("vinylPlayer").style.transform = "translateY(100vh) scale(0.75)";
+            setTimeout(() => {
+                document.getElementById("heartContainer").classList.remove("heartContainerHidden");
+            }, 1000);
+
+            document.body.style.backgroundColor = "#ed8cbe";
+
+            document.getElementById("yesButton").addEventListener('click', handleYesButtonClick, { once: true });
+        }
+
+        const handleYesButtonClick = () => {
+            console.log("SHE SAID YES");
+        }
+
+        const handleDocumentClick = () => {
+
+            if (counter >= 2) {
+                document.removeEventListener('click', handleDocumentClick);
+                handleHeartPopup();
+                return;
+            }
+
+            const vinyls = document.querySelectorAll('.vinylBackground');
+
+            vinyls.forEach(vinyl => {
+                if (vinyl.classList.contains('spinningVinyl')) {
+
+                    const style = getComputedStyle(vinyl);
+                    const transform = style.transform;
+
+                    vinyl.style.transform = transform;
+
+                    const matrix = new DOMMatrix(transform);
+                    const rotation = Math.atan2(matrix.b, matrix.a) * (180 / Math.PI);
+
+                    vinyl.style.setProperty('--vinyl-rotation', rotation + 'deg');
+
+                    vinyl.classList.remove('spinningVinyl');
+                    vinyl.classList.add('afterVinyl');
+                }
+
+                else if (vinyl.classList.contains('beforeVinyl')) {
+
+                    if (vinyl.id !== `vinyl${counter}` || vinyl.id === "vinyl0") {
+                        return;
+                    }
+
+
+                    vinyl.classList.remove('beforeVinyl');
+                    vinyl.classList.add('timeoutVinyl');
+                    setTimeout(() => {
+                        vinyl.classList.remove('timeoutVinyl');
+                        vinyl.classList.add('activeVinyl');
+
+                        vinyl.addEventListener('animationend', () => {
+                            vinyl.classList.remove('activeVinyl');
+                            vinyl.classList.add('spinningVinyl');
+                            counter++;
+                        }, { once: true });
+
+                    }, 2000);
+                }
+
+            });
+        }
+
+        document.addEventListener('click', handleDocumentClick);
+
+        // first vinyl entry animation
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const vinyl0 = document.getElementById('vinyl0');
+            vinyl0.classList.add('beforeVinyl');
+            vinyl0.classList.add('activeVinyl');
+
+            vinyl0.addEventListener('animationend', () => {
+                vinyl0.classList.remove('activeVinyl');
+                vinyl0.classList.add('spinningVinyl');
+                counter++;
+            }, { once: true });
+
+        });
+
+    </script>
+</body>
+
+</html>

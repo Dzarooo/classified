@@ -1,0 +1,74 @@
+.vinylBackground {
+    background: repeating-radial-gradient(circle at center, #111 0 3px, #000 3px 6px);
+
+    /* mask out the inner circle */
+    -webkit-mask: radial-gradient(circle at center, transparent 0 4%, black 4% 100%);
+    -webkit-mask-composite: destination-out;
+    mask: radial-gradient(circle at center, transparent 0 4%, black 4% 100%);
+    mask-composite: intersect;
+}
+
+.beforeVinyl {
+    transform: translateX(-100vw) scale(1.1);
+}
+
+.timeoutVinyl {
+    transform: translateX(-100vw) scale(1.1);
+}
+
+.activeVinyl {
+    transform: translateX(-50%) scale(1.1);
+    animation: entranceVinyl 2.5s ease-out forwards;
+}
+
+.spinningVinyl {
+    animation: spinVinyl 10s linear infinite;
+}
+
+.afterVinyl {
+    transform: translateX(100vw) scale(1.0);
+    animation: exitVinyl 2.5s ease-in forwards;
+}
+
+.heartContainerHidden {
+    transform: translateY(100vh);
+}
+
+
+@keyframes entranceVinyl {
+    0% {
+        transform: translateX(-100vw) scale(1.1);
+    }
+
+    90% {
+        transform: translateX(-50%) scale(1.1);
+    }
+
+    100% {
+        transform: translateX(-50%) scale(1.0);
+    }
+}
+
+@keyframes exitVinyl {
+    0% {
+        transform: translateX(-50%) scale(1.0) rotate(var(--vinyl-rotation));
+    }
+
+    10% {
+        transform: translateX(-50%) scale(1.1) rotate(var(--vinyl-rotation));
+    }
+
+    100% {
+        transform: translateX(100vw) scale(1.1) rotate(var(--vinyl-rotation));
+    }
+}
+
+@keyframes spinVinyl {
+    from {
+        transform: translateX(-50%) scale(1.0) rotate(0deg);
+    }
+
+    to {
+        transform: translateX(-50%) scale(1.0) rotate(360deg);
+    }
+}
