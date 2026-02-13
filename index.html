@@ -151,11 +151,71 @@
             mouseY = e.clientY;
         });
 
+
         let counter = 0;
         const noButtonContainer = document.getElementById("noButtonContainer");
+        const yesButton = document.getElementById("yesButton");
+
+
+        // falling hearts effect parameters
+        const spawnIntervalMin = 25;
+        const spawnIntervalMax = 100;
+        const fallDuration = 3000;
+        const totalEffectDuration = 10000;
+
+        let running = true;
+
+        function spawnHeartsLoop() {
+            console.log("spawning hearts");
+            if (!running) return;
+
+            spawnElement();
+
+            const nextDelay = randomBetween(
+                spawnIntervalMin,
+                spawnIntervalMax
+            );
+
+            setTimeout(spawnHeartsLoop, nextDelay);
+        }
+
+        const randomBetween = (min, max) =>
+            Math.random() * (max - min) + min;
+
+        function spawnElement() {
+            const size = Math.min(window.innerWidth, window.innerHeight) * 0.05;
+
+            const el = document.createElement("div");
+            el.classList.add("fallingHeart");
+
+            el.style.left = Math.random() * window.innerWidth + "px";
+
+            el.style.animationDuration = (
+                Math.random() * 1000 + 2500
+            ) + "ms";
+
+            el.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="${size}"
+             height="${size}"
+             fill="rgb(200,14,14)"
+             viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                  d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+        </svg>
+    `;
+
+            document.body.appendChild(el);
+
+            el.addEventListener("animationend", () => {
+                el.remove();
+            });
+        }
+
+
+
 
         const handleHeartPopup = () => {
-            console.log("making heart sequence");
 
             document.getElementById("vinylPlayer").style.transform = "translateY(100vh) scale(0.75)";
             setTimeout(() => {
@@ -164,13 +224,21 @@
 
             document.body.style.backgroundColor = "#ed8cbe";
 
-            document.getElementById("yesButton").addEventListener('click', handleYesButtonClick, { once: true });
+            yesButton.addEventListener('click', handleYesButtonClick, { once: true });
             noButtonContainer.addEventListener('mouseenter', handleNoButtonHover);
         }
 
         const handleYesButtonClick = () => {
-            console.log("SHE SAID YES");
             document.getElementById("heartText").textContent = "YAAAAAAYYYYYY!!!!!";
+            spawnHeartsLoop();
+
+            yesButton.style.opacity = "0";
+            yesButton.style.pointerEvents = "none";
+            noButtonContainer.style.opacity = "0";
+
+            setTimeout(() => {
+                running = false;
+            }, totalEffectDuration);
         }
 
         const handleNoButtonHover = () => {
@@ -221,9 +289,10 @@
         };
 
 
+
         const handleDocumentClick = () => {
 
-            if (counter >= 2) {
+            if (counter >= 5) {
                 document.removeEventListener('click', handleDocumentClick);
                 handleHeartPopup();
                 return;

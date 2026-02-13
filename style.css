@@ -30,8 +30,22 @@
     animation: exitVinyl 2.5s ease-in forwards;
 }
 
+
 .heartContainerHidden {
     transform: translateY(100vh);
+}
+
+
+.fallingHeart {
+    position: fixed;
+    top: -50px;
+    animation: fallHeart linear forwards;
+}
+
+@keyframes fallHeart {
+    to {
+        transform: translateY(110vh);
+    }
 }
 
 
