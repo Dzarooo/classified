@@ -12,12 +12,13 @@
 <body
     class="bg-pink-100 min-h-screen flex items-center justify-center overflow-hidden transition-colors duration-1000 relative">
     <!-- Heart container -->
-    <div id="heartContainer"" class=" absolute min-h-screen w-screen flex items-center justify-center flex-col
-        transition-transform duration-2000 heartContainerHidden">
+    <div id="heartContainer"
+        class="absolute min-h-screen w-screen flex items-center justify-center flex-col transition-transform duration-2000 heartContainerHidden">
 
         <!-- Heart -->
         <div class="relative flex items-center justify-center">
-            <p class="absolute text-4xl font-bold text-pink-200 text-center -translate-y-[30px]">Czy zostaniesz moją
+            <p id="heartText" class="absolute text-4xl font-bold text-pink-200 text-center -translate-y-[30px]">Czy
+                zostaniesz moją
                 Walentynką?</p>
             <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" fill="rgb(255,14,14)"
                 class="bi bi-heart-fill" viewBox="0 0 16 16">
@@ -26,11 +27,14 @@
         </div>
 
         <!-- Buttons -->
-        <div class="flex flex-nowrap gap-20">
+        <div class="flex flex-nowrap items-center gap-20">
             <button id="yesButton"
-                class="px-8 py-2 bg-green-600 rounded-xl text-slate-100 text-xl font-semibold cursor-pointer hover:scale-110 transition-transform">Tak!</button>
-            <button id="noButton"
-                class="px-8 py-2 bg-red-600 rounded-xl text-slate-100 text-xl font-semibold">Nie.</button>
+                class="px-8 py-2 h-fit bg-green-600 rounded-xl text-slate-100 text-xl font-semibold cursor-pointer hover:scale-110 transition-transform">Tak!</button>
+
+            <div id="noButtonContainer" class="flex items-center justify-center p-4">
+                <button id="noButton"
+                    class="px-8 py-2 bg-red-600 rounded-xl text-slate-100 text-xl font-semibold">Nie.</button>
+            </div>
         </div>
     </div>
 
@@ -138,7 +142,17 @@
     </div>
 
     <script>
+
+        let mouseX = 0;
+        let mouseY = 0;
+
+        document.addEventListener("mousemove", (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
         let counter = 0;
+        const noButtonContainer = document.getElementById("noButtonContainer");
 
         const handleHeartPopup = () => {
             console.log("making heart sequence");
@@ -151,11 +165,61 @@
             document.body.style.backgroundColor = "#ed8cbe";
 
             document.getElementById("yesButton").addEventListener('click', handleYesButtonClick, { once: true });
+            noButtonContainer.addEventListener('mouseenter', handleNoButtonHover);
         }
 
         const handleYesButtonClick = () => {
             console.log("SHE SAID YES");
+            document.getElementById("heartText").textContent = "YAAAAAAYYYYYY!!!!!";
         }
+
+        const handleNoButtonHover = () => {
+            const style = getComputedStyle(noButtonContainer);
+            const matrix = new DOMMatrix(style.transform);
+
+            const currentX = matrix.m41;
+            const currentY = matrix.m42;
+
+            const rect = noButtonContainer.getBoundingClientRect();
+
+            let minX = rect.width + rect.width * 0.1;
+            let maxX = minX * 1.5;
+
+            let minY = rect.height + rect.height * 0.1;
+            let maxY = minY * 1.5;
+
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+
+            let newX, newY, newLeft, newTop;
+
+            do {
+                const randomX = (Math.random() * (maxX - minX) + minX) * (Math.random() < 0.5 ? -1 : 1);
+                const randomY = (Math.random() * (maxY - minY) + minY) * (Math.random() < 0.5 ? -1 : 1);
+
+                let targetLeft = rect.left + randomX;
+                let targetTop = rect.top + randomY;
+
+                // clamp to viewport
+                targetLeft = Math.min(Math.max(0, targetLeft), viewportWidth - rect.width);
+                targetTop = Math.min(Math.max(0, targetTop), viewportHeight - rect.height);
+
+                newLeft = targetLeft;
+                newTop = targetTop;
+
+                newX = currentX + (targetLeft - rect.left);
+                newY = currentY + (targetTop - rect.top);
+
+            } while (
+                mouseX >= newLeft &&
+                mouseX <= newLeft + rect.width &&
+                mouseY >= newTop &&
+                mouseY <= newTop + rect.height
+            );
+
+            noButtonContainer.style.transform = `translate(${newX}px, ${newY}px)`;
+        };
+
 
         const handleDocumentClick = () => {
 
